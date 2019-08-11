@@ -46,7 +46,9 @@ total_change_in_profits = 0.0
 # Perform a check to verify the greatest increase and decrease and record the respective index
 while counter < (len(profits)):
     
+    # Calculate change in profit from current month to previous month
     change_in_profit = (profits[counter] - profits[counter - 1])
+    # Calculate cumulative change in profit for each of the months
     total_change_in_profits += change_in_profit
     
     if  change_in_profit > greatest_increase:
@@ -56,13 +58,19 @@ while counter < (len(profits)):
         greatest_decrease = change_in_profit
         greatest_dec_index = counter
     
+    # Increment counter to get next element in the list
     counter +=1
 
-# Print analysis to the console    
-print("Financial Analysis")
-print("----------------------------")
-print(f"Total Months: {counter}")
-print(f"Total: ${int(sum(profits))}")
-print(f"Average Change: ${round(total_change_in_profits/(counter - 1),2)}")
-print(f"Greatest Increase in Profits: {months[greatest_inc_index]} (${round(greatest_increase)})")
-print(f"Greatest Decrease in Profits: {months[greatest_dec_index]} (${round(greatest_decrease)})")
+# Set output file name
+output_path = 'output.txt'
+
+# Open the output path as a file object
+with open(output_path, 'w') as file:
+    # Write analysis to the output file
+    file.write("Financial Analysis\n")
+    file.write("----------------------------\n")
+    file.write(f"Total Months: {counter}\n")
+    file.write(f"Total: ${int(sum(profits))}\n")
+    file.write(f"Average Change: ${round(total_change_in_profits/(counter - 1),2)}\n")
+    file.write(f"Greatest Increase in Profits: {months[greatest_inc_index]} (${round(greatest_increase)})\n")
+    file.write(f"Greatest Decrease in Profits: {months[greatest_dec_index]} (${round(greatest_decrease)})\n")
